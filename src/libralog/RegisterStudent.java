@@ -40,8 +40,24 @@ public class RegisterStudent extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter both student ID and password.", "Registration Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+
+        // Check the length of the student ID and password
+        if (studentID.length() < 9 || password.length() < 13) {
+            JOptionPane.showMessageDialog(this, "The student ID must be at least 8 characters (Ex: TP012345) and the password must be at least 12 characters with at least one number, one lowercase letter, and one uppercase letter.", "Registration Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Check the format of the student ID and password
+        if (!studentID.matches("TP\\d{6}") || !password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$")) {
+            JOptionPane.showMessageDialog(this, "The student ID must start with 'TP' followed by six digits. The password must contain at least one number, one lowercase letter, and one uppercase letter.", "Registration Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+
+        
         return true;
     }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -180,7 +196,6 @@ public class RegisterStudent extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         String studentID = txtStudentID.getText();
         String password = txtPassword.getText();
-        registerNewStudent(studentID, password);
         
         boolean registerSuccessful = registerNewStudent(studentID, password);
         
@@ -199,6 +214,8 @@ public class RegisterStudent extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Your Student ID or Password is Invalid.");
             System.out.println(e);
+            txtStudentID.setText(" ");
+            txtStudentID.setText(" ");
         }
     }//GEN-LAST:event_submitBtnActionPerformed
 
