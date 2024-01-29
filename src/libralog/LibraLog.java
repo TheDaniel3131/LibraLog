@@ -4,6 +4,8 @@
  */
 package libralog;
 
+import java.sql.Connection;
+
 /**
  *
  * @author Daniel
@@ -14,7 +16,16 @@ public class LibraLog {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // Call the mycon method from the db class
+        Connection connection = db.mycon();
+
+        // Check if the connection is successful
+        if (connection != null) {
+            System.out.println("Database connection successful!");
+            // Add your additional test logic here, if needed
+        } else {
+            System.out.println("Failed to connect to the database.");
+        }
     }
     
 }
