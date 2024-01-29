@@ -15,7 +15,7 @@ import java.sql.*;
 
 public class RegisterStudent extends javax.swing.JFrame {
 
-    /**
+    /** 
      * Creates new form RegisterStudent
      */
     
@@ -34,12 +34,13 @@ public class RegisterStudent extends javax.swing.JFrame {
         this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
     }
             
-    private void registerNewStudent(String studentID, String password){
+    private boolean registerNewStudent(String studentID, String password){
         // Check if the provided student ID and password are valid
         if (studentID.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter both student ID and password.", "Registration Error", JOptionPane.ERROR_MESSAGE);
-        return;
+            return false;
         }
+        return true;
     }
     
     /**
@@ -160,6 +161,12 @@ public class RegisterStudent extends javax.swing.JFrame {
         String password = txtPassword.getText();
         registerNewStudent(studentID, password);
         
+        boolean registerSuccessful = registerNewStudent(studentID, password);
+        
+        if (!registerSuccessful){
+            return;
+        }
+        
         try {
             Statement s = db.mycon().createStatement();
             s.executeUpdate("INSERT INTO users (student_id, password) VALUES ('"+studentID+"', '"+password+"')");
@@ -168,6 +175,7 @@ public class RegisterStudent extends javax.swing.JFrame {
             new MainMenu().setVisible(true);
             
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Your Student ID or Password is Invalid.");
             System.out.println(e);
         }
     }//GEN-LAST:event_submitBtnActionPerformed
