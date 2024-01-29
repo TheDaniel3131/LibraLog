@@ -5,43 +5,33 @@
 package libralog;
 
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import java.sql.*;
 
 /**
  *
  * @author Daniel
  */
+public class StaffMainMenu extends javax.swing.JFrame {
 
-public class LoginStudent extends javax.swing.JFrame {
-
-    /** 
-     * Creates new form RegisterStudent
+    /**
+     * Creates new form MainMenu
      */
-    
-   // Using SQL server for storing student registration records.
-   // https://www.javatpoint.com/example-to-connect-to-the-mysql-database
-    
-   // Good Tutorial: https://www.youtube.com/watch?v=ZsbgiTR6osA&ab_channel=DappCode
-    
-   
-    Connection con = null;
-    ResultSet rs = null;
-    PreparedStatement ps = null;
-        
-    public LoginStudent() {
+    public StaffMainMenu() {
         initComponents();
         this.setSize(770, 450);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
         
-        this.setTitle("Login As Student | LibraLog");
+        this.setTitle("Main Menu | LibraLog");
         this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
-        
-        con = db.mycon();
     }
-            
+
+    // Created Constructor. Allowing to pass Student ID from login to Main Menu here.
+    StaffMainMenu(String studentID) {
+        this();
+        showStudentID.setText("Welcome, " +studentID);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,8 +50,7 @@ public class LoginStudent extends javax.swing.JFrame {
         txtPassword = new javax.swing.JTextField();
         txtStudentID = new javax.swing.JTextField();
         submitBtn = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        backBtn = new javax.swing.JButton();
+        showStudentID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,9 +60,9 @@ public class LoginStudent extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 30)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(224, 204, 190));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Login Student Account");
+        jLabel3.setText("LibraLog");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(50, 30, 370, 40);
+        jLabel3.setBounds(20, 20, 150, 40);
 
         jPanel5.setBackground(new java.awt.Color(60, 54, 51));
         jPanel5.setLayout(null);
@@ -122,7 +111,7 @@ public class LoginStudent extends javax.swing.JFrame {
         submitBtn.setBackground(new java.awt.Color(149, 119, 81));
         submitBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         submitBtn.setForeground(new java.awt.Color(230, 208, 170));
-        submitBtn.setText("Login Now");
+        submitBtn.setText("Submit");
         submitBtn.setBorder(null);
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,25 +124,11 @@ public class LoginStudent extends javax.swing.JFrame {
         jPanel1.add(jPanel5);
         jPanel5.setBounds(37, 135, 460, 250);
 
-        jLabel5.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(224, 205, 210));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Students Login Here!");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(-140, 70, 600, 30);
-
-        backBtn.setBackground(new java.awt.Color(60, 54, 51));
-        backBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        backBtn.setForeground(new java.awt.Color(230, 208, 170));
-        backBtn.setText("Back");
-        backBtn.setBorder(null);
-        backBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(backBtn);
-        backBtn.setBounds(590, 30, 120, 40);
+        showStudentID.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        showStudentID.setForeground(new java.awt.Color(224, 205, 210));
+        showStudentID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(showStudentID);
+        showStudentID.setBounds(470, 10, 190, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,46 +144,8 @@ public class LoginStudent extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        Home home = new Home();
-        this.setVisible(false);
-        home.setVisible(true);
-        
-    }//GEN-LAST:event_backBtnActionPerformed
-
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        String studentID = txtStudentID.getText();
-        String password = txtPassword.getText();
 
-        try {
-            String query = "SELECT * from users WHERE student_id=? AND password=?";
-            ps = con.prepareCall(query);
-            ps.setString(1, studentID);
-            ps.setString(2, password);
-            
-            rs = ps.executeQuery();
-            
-            if(rs.next()){
-              JOptionPane.showMessageDialog(rootPane, "You Have Logged In To Our System.", "Success!", JOptionPane.INFORMATION_MESSAGE);
-              
-              // Passing Student ID value to Main Menu.
-              MainMenu mm = new MainMenu(studentID);
-              mm.setVisible(true);
-//              new MainMenu(studentID).setVisible(true);
-              this.setVisible(false);   
-              
-            } else if (studentID.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please enter both student ID and  password.", "Empty Fills", JOptionPane.ERROR_MESSAGE);
-            
-            } else{
-              JOptionPane.showMessageDialog(rootPane, "Your StudentID or Password is Incorrect.", "Failed!", JOptionPane.ERROR_MESSAGE);  
-              return;
-            }
-            
-        }
-        catch (Exception e){
-            
-        }
     }//GEN-LAST:event_submitBtnActionPerformed
 
     /**
@@ -228,13 +165,13 @@ public class LoginStudent extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -242,20 +179,19 @@ public class LoginStudent extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginStudent().setVisible(true);
+                new StaffMainMenu().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel showStudentID;
     private javax.swing.JButton submitBtn;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtStudentID;
