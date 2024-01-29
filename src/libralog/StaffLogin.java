@@ -22,6 +22,10 @@ public class StaffLogin extends javax.swing.JFrame {
    // Using SQL server for storing student registration records.
    // https://www.javatpoint.com/example-to-connect-to-the-mysql-database
     
+      
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
     
     public StaffLogin() {
         initComponents();
@@ -30,18 +34,12 @@ public class StaffLogin extends javax.swing.JFrame {
         this.setVisible(true);
         this.setResizable(false);
         
-        this.setTitle("Register As Student | LibraLog");
+        this.setTitle("Login As Staff | LibraLog");
         this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
+        
+        con = db.mycon();
     }
             
-    private boolean registerNewStudent(String studentID, String password){
-        // Check if the provided student ID and password are valid
-        if (studentID.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter both student ID and password.", "Registration Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,7 +57,7 @@ public class StaffLogin extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
-        txtStudentID = new javax.swing.JTextField();
+        txtStaffUsername = new javax.swing.JTextField();
         submitBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
@@ -89,7 +87,7 @@ public class StaffLogin extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(238, 237, 235));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Staff ID:");
+        jLabel15.setText("Username:");
         jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel5.add(jLabel15);
         jLabel15.setBounds(50, 30, 110, 30);
@@ -110,15 +108,15 @@ public class StaffLogin extends javax.swing.JFrame {
         jPanel5.add(txtPassword);
         txtPassword.setBounds(170, 80, 161, 33);
 
-        txtStudentID.setBackground(new java.awt.Color(100, 108, 116));
-        txtStudentID.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
-        txtStudentID.setForeground(new java.awt.Color(224, 205, 210));
-        txtStudentID.setAlignmentX(0.0F);
-        txtStudentID.setAlignmentY(0.0F);
-        txtStudentID.setAutoscrolls(false);
-        txtStudentID.setBorder(null);
-        jPanel5.add(txtStudentID);
-        txtStudentID.setBounds(170, 30, 161, 33);
+        txtStaffUsername.setBackground(new java.awt.Color(100, 108, 116));
+        txtStaffUsername.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
+        txtStaffUsername.setForeground(new java.awt.Color(224, 205, 210));
+        txtStaffUsername.setAlignmentX(0.0F);
+        txtStaffUsername.setAlignmentY(0.0F);
+        txtStaffUsername.setAutoscrolls(false);
+        txtStaffUsername.setBorder(null);
+        jPanel5.add(txtStaffUsername);
+        txtStaffUsername.setBounds(170, 30, 161, 33);
 
         submitBtn.setBackground(new java.awt.Color(81, 114, 149));
         submitBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
@@ -178,25 +176,36 @@ public class StaffLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        String studentID = txtStudentID.getText();
+        String staffUsername = txtStaffUsername.getText();
         String password = txtPassword.getText();
-        registerNewStudent(studentID, password);
-        
-        boolean registerSuccessful = registerNewStudent(studentID, password);
-        
-        if (!registerSuccessful){
-            return;
-        }
         
         try {
-            Statement s = db.mycon().createStatement();
-            s.executeUpdate("INSERT INTO users (student_id, password) VALUES ('"+studentID+"', '"+password+"')");
-            JOptionPane.showMessageDialog(rootPane, "Your Account Has Been Created.");
-            this.setVisible(false);
-            new MainMenu().setVisible(true);
+            String query = "SELECT * from staffs WHERE username=? AND password=?";
+            ps = con.prepareCall(query);
+            ps.setString(1, staffUsername);
+            ps.setString(2, password);
             
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Your Student ID or Password is Invalid.");
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+              JOptionPane.showMessageDialog(rootPane, "You Have Logged In To Our System.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+              
+              // Passing Student ID value to Main Menu.
+              MainMenu mm = new MainMenu(staffUsername);
+              mm.setVisible(true);
+//              new MainMenu(studentID).setVisible(true);
+              this.setVisible(false);   
+              
+            } else if (staffUsername.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter both username and password.", "Empty Fills", JOptionPane.ERROR_MESSAGE);
+            
+            } else{
+              JOptionPane.showMessageDialog(rootPane, "Your StudentID or Password is Incorrect.", "Failed!", JOptionPane.ERROR_MESSAGE);  
+              return;
+            }
+            
+        }
+        catch (Exception e){
             System.out.println(e);
         }
     }//GEN-LAST:event_submitBtnActionPerformed
@@ -248,6 +257,6 @@ public class StaffLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JButton submitBtn;
     private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtStudentID;
+    private javax.swing.JTextField txtStaffUsername;
     // End of variables declaration//GEN-END:variables
 }

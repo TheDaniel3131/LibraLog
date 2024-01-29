@@ -198,7 +198,7 @@ public class LoginStudent extends javax.swing.JFrame {
               this.setVisible(false);   
               
             } else if (studentID.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please enter both student ID and  password.", "Empty Fills", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter both student ID and password.", "Empty Fills", JOptionPane.ERROR_MESSAGE);
             
             } else{
               JOptionPane.showMessageDialog(rootPane, "Your StudentID or Password is Incorrect.", "Failed!", JOptionPane.ERROR_MESSAGE);  
@@ -207,7 +207,7 @@ public class LoginStudent extends javax.swing.JFrame {
             
         }
         catch (Exception e){
-            
+            System.out.println(e);
         }
     }//GEN-LAST:event_submitBtnActionPerformed
 
