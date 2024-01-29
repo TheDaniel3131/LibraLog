@@ -13,7 +13,7 @@ import java.sql.*;
  * @author Daniel
  */
 
-public class RegisterStudent extends javax.swing.JFrame {
+public class StaffLogin extends javax.swing.JFrame {
 
     /** 
      * Creates new form RegisterStudent
@@ -23,7 +23,7 @@ public class RegisterStudent extends javax.swing.JFrame {
    // https://www.javatpoint.com/example-to-connect-to-the-mysql-database
     
     
-    public RegisterStudent() {
+    public StaffLogin() {
         initComponents();
         this.setSize(770, 450);
         this.setLocationRelativeTo(null);
@@ -66,17 +66,17 @@ public class RegisterStudent extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(116, 114, 100));
+        jPanel1.setBackground(new java.awt.Color(71, 74, 79));
         jPanel1.setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 30)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(224, 204, 190));
+        jLabel3.setForeground(new java.awt.Color(190, 199, 224));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Register User Account");
+        jLabel3.setText("LibraLog Staff Login");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(50, 30, 370, 40);
+        jLabel3.setBounds(30, 30, 370, 40);
 
-        jPanel5.setBackground(new java.awt.Color(60, 54, 51));
+        jPanel5.setBackground(new java.awt.Color(50, 67, 72));
         jPanel5.setLayout(null);
 
         jLabel14.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
@@ -89,7 +89,7 @@ public class RegisterStudent extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(238, 237, 235));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Student ID:");
+        jLabel15.setText("Staff ID:");
         jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel5.add(jLabel15);
         jLabel15.setBounds(50, 30, 110, 30);
@@ -97,11 +97,11 @@ public class RegisterStudent extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Poppins", 1, 15)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(238, 237, 235));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("If any problem, email help@libralog.com");
+        jLabel16.setText("Check email @: management@LibraLog.com");
         jPanel5.add(jLabel16);
         jLabel16.setBounds(-80, 190, 600, 30);
 
-        txtPassword.setBackground(new java.awt.Color(116, 114, 100));
+        txtPassword.setBackground(new java.awt.Color(100, 108, 116));
         txtPassword.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
         txtPassword.setForeground(new java.awt.Color(224, 205, 210));
         txtPassword.setAlignmentX(0.0F);
@@ -110,7 +110,7 @@ public class RegisterStudent extends javax.swing.JFrame {
         jPanel5.add(txtPassword);
         txtPassword.setBounds(170, 80, 161, 33);
 
-        txtStudentID.setBackground(new java.awt.Color(116, 114, 100));
+        txtStudentID.setBackground(new java.awt.Color(100, 108, 116));
         txtStudentID.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
         txtStudentID.setForeground(new java.awt.Color(224, 205, 210));
         txtStudentID.setAlignmentX(0.0F);
@@ -120,9 +120,9 @@ public class RegisterStudent extends javax.swing.JFrame {
         jPanel5.add(txtStudentID);
         txtStudentID.setBounds(170, 30, 161, 33);
 
-        submitBtn.setBackground(new java.awt.Color(149, 119, 81));
+        submitBtn.setBackground(new java.awt.Color(81, 114, 149));
         submitBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        submitBtn.setForeground(new java.awt.Color(230, 208, 170));
+        submitBtn.setForeground(new java.awt.Color(170, 215, 230));
         submitBtn.setText("Submit");
         submitBtn.setBorder(null);
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -137,15 +137,15 @@ public class RegisterStudent extends javax.swing.JFrame {
         jPanel5.setBounds(37, 135, 460, 250);
 
         jLabel5.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(224, 205, 210));
+        jLabel5.setForeground(new java.awt.Color(101, 106, 184));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("*Only Student Accounts*");
+        jLabel5.setText("*Only Admin or Staff Can Login*");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(-120, 70, 600, 30);
+        jLabel5.setBounds(-90, 70, 600, 30);
 
         backBtn.setBackground(new java.awt.Color(60, 54, 51));
         backBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        backBtn.setForeground(new java.awt.Color(230, 208, 170));
+        backBtn.setForeground(new java.awt.Color(170, 204, 230));
         backBtn.setText("Back");
         backBtn.setBorder(null);
         backBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -191,10 +191,9 @@ public class RegisterStudent extends javax.swing.JFrame {
         try {
             Statement s = db.mycon().createStatement();
             s.executeUpdate("INSERT INTO users (student_id, password) VALUES ('"+studentID+"', '"+password+"')");
-            JOptionPane.showMessageDialog(rootPane, "Your Account Has Been Created.", "Success!", JOptionPane.INFORMATION_MESSAGE);
-            JOptionPane.showMessageDialog(rootPane, "Student May Now Direct To Login", "Student Account Information", JOptionPane.YES_OPTION);
+            JOptionPane.showMessageDialog(rootPane, "Your Account Has Been Created.");
             this.setVisible(false);
-            new LoginStudent().setVisible(true);
+            new MainMenu().setVisible(true);
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Your Student ID or Password is Invalid.");
@@ -219,20 +218,21 @@ public class RegisterStudent extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegisterStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegisterStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegisterStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegisterStudent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterStudent().setVisible(true);
+                new StaffLogin().setVisible(true);
             }
         });
     }

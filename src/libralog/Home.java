@@ -40,9 +40,9 @@ public class Home extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        loginStaff = new javax.swing.JButton();
+        registerAccount = new javax.swing.JButton();
+        loginStudent = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
@@ -81,34 +81,44 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(80, 30, 150, 40);
 
-        jButton1.setBackground(new java.awt.Color(60, 54, 51));
-        jButton1.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(229, 225, 218));
-        jButton1.setText("Login As Staff");
-        jButton1.setBorder(null);
-        jPanel1.add(jButton1);
-        jButton1.setBounds(90, 270, 260, 40);
-
-        jButton2.setBackground(new java.awt.Color(60, 54, 51));
-        jButton2.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(229, 225, 218));
-        jButton2.setText("Register Account");
-        jButton2.setBorder(null);
-        jPanel1.add(jButton2);
-        jButton2.setBounds(90, 150, 260, 40);
-
-        jButton3.setBackground(new java.awt.Color(60, 54, 51));
-        jButton3.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(229, 225, 218));
-        jButton3.setText("Login As Student");
-        jButton3.setBorder(null);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        loginStaff.setBackground(new java.awt.Color(60, 54, 51));
+        loginStaff.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        loginStaff.setForeground(new java.awt.Color(229, 225, 218));
+        loginStaff.setText("Login As Staff");
+        loginStaff.setBorder(null);
+        loginStaff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                loginStaffActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3);
-        jButton3.setBounds(90, 210, 260, 40);
+        jPanel1.add(loginStaff);
+        loginStaff.setBounds(90, 270, 260, 40);
+
+        registerAccount.setBackground(new java.awt.Color(60, 54, 51));
+        registerAccount.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        registerAccount.setForeground(new java.awt.Color(229, 225, 218));
+        registerAccount.setText("Register Account");
+        registerAccount.setBorder(null);
+        registerAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerAccountActionPerformed(evt);
+            }
+        });
+        jPanel1.add(registerAccount);
+        registerAccount.setBounds(90, 150, 260, 40);
+
+        loginStudent.setBackground(new java.awt.Color(60, 54, 51));
+        loginStudent.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        loginStudent.setForeground(new java.awt.Color(229, 225, 218));
+        loginStudent.setText("Login As Student");
+        loginStudent.setBorder(null);
+        loginStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginStudentActionPerformed(evt);
+            }
+        });
+        jPanel1.add(loginStudent);
+        loginStudent.setBounds(90, 210, 260, 40);
 
         jButton4.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         jButton4.setText("Register Account");
@@ -128,9 +138,26 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void loginStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginStudentActionPerformed
+       LoginStudent ls = new LoginStudent();
+       this.setVisible(false);
+       ls.setVisible(true);
+       ls.setFocusable(true);
+    }//GEN-LAST:event_loginStudentActionPerformed
+
+    private void registerAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerAccountActionPerformed
+       RegisterStudent rs = new RegisterStudent();
+       this.setVisible(false);
+       rs.setVisible(true);
+       rs.setFocusable(true);
+    }//GEN-LAST:event_registerAccountActionPerformed
+
+    private void loginStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginStaffActionPerformed
+       StaffLogin lstaff = new StaffLogin();
+       this.setVisible(false);
+       lstaff.setVisible(true);
+       lstaff.setFocusable(true);
+    }//GEN-LAST:event_loginStaffActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,14 +195,14 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton loginStaff;
+    private javax.swing.JButton loginStudent;
+    private javax.swing.JButton registerAccount;
     // End of variables declaration//GEN-END:variables
 }
