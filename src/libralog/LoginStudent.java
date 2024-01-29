@@ -190,10 +190,14 @@ public class LoginStudent extends javax.swing.JFrame {
             
             if(rs.next()){
               JOptionPane.showMessageDialog(rootPane, "You Have Logged In To Our System.", "Success!", JOptionPane.INFORMATION_MESSAGE);
-              this.setVisible(false);
-              MainMenu mm = new MainMenu();
+              
+              // Passing Student ID value to Main Menu.
+              MainMenu mm = new MainMenu(studentID);
               mm.setVisible(true);
-              mm.setFocusable(true);
+//              new MainMenu(studentID).setVisible(true);
+              this.setVisible(false);
+
+
               
             } else{
               JOptionPane.showMessageDialog(rootPane, "Your StudentID or Password is Incorrect.", "Failed!", JOptionPane.ERROR_MESSAGE);  

@@ -26,6 +26,12 @@ public class MainMenu extends javax.swing.JFrame {
         this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
     }
 
+    // Created Constructor. Allowing to pass Student ID from login to Main Menu here.
+    MainMenu(String studentID) {
+        this();
+        showStudentID.setText("Welcome, " +studentID);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +50,7 @@ public class MainMenu extends javax.swing.JFrame {
         txtPassword = new javax.swing.JTextField();
         txtStudentID = new javax.swing.JTextField();
         submitBtn = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        showStudentID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,9 +60,9 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 30)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(224, 204, 190));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Library Management System");
+        jLabel3.setText("LibraLog");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(50, 30, 640, 40);
+        jLabel3.setBounds(20, 20, 150, 40);
 
         jPanel5.setBackground(new java.awt.Color(60, 54, 51));
         jPanel5.setLayout(null);
@@ -118,12 +124,11 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.add(jPanel5);
         jPanel5.setBounds(37, 135, 460, 250);
 
-        jLabel5.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(224, 205, 210));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("*Only Student Accounts*");
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(-120, 70, 600, 30);
+        showStudentID.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        showStudentID.setForeground(new java.awt.Color(224, 205, 210));
+        showStudentID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(showStudentID);
+        showStudentID.setBounds(470, 10, 190, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,20 +145,7 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        String studentID = txtStudentID.getText();
-        String password = txtPassword.getText();
-        registerNewStudent(studentID, password);
 
-        try {
-            Statement s = db.mycon().createStatement();
-            s.executeUpdate("INSERT INTO users (student_id, password) VALUES ('"+studentID+"', '"+password+"')");
-            JOptionPane.showMessageDialog(rootPane, "Your Account Has Been Created.");
-            this.setVisible(false);
-            new MainMenu().setVisible(true);
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }//GEN-LAST:event_submitBtnActionPerformed
 
     /**
@@ -196,9 +188,9 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel showStudentID;
     private javax.swing.JButton submitBtn;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtStudentID;
