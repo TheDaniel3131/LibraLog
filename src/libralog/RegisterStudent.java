@@ -42,21 +42,32 @@ public class RegisterStudent extends javax.swing.JFrame {
         }
 
         // Check the length of the student ID and password
-        if (studentID.length() < 9 || password.length() < 13) {
-            JOptionPane.showMessageDialog(this, "The student ID must be at least 8 characters (Ex: TP012345) and the password must be at least 12 characters with at least one number, one lowercase letter, and one uppercase letter.", "Registration Error", JOptionPane.ERROR_MESSAGE);
+        if (studentID.length() < 8 || password.length() < 8) {
+            JOptionPane.showMessageDialog(this, "The student ID must be at least 8 characters (Ex: TP012345) and the password must be at least 8 characters long with at least one number, one lowercase letter, and one uppercase letter.", "Registration Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
         // Check the format of the student ID and password
-        if (!studentID.matches("TP\\d{6}") || !password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$")) {
-            JOptionPane.showMessageDialog(this, "The student ID must start with 'TP' followed by six digits. The password must contain at least one number, one lowercase letter, and one uppercase letter.", "Registration Error", JOptionPane.ERROR_MESSAGE);
+        if (!studentID.matches("TP\\d{6}") || !password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$")) {
+            JOptionPane.showMessageDialog(this, "The student ID must start with 'TP' followed by six digits. The password must be at least 8 characters long, contain at least one number, one lowercase letter, one uppercase letter, and one special character.", "Registration Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-
-        
+        // Check if the student ID already exists in the database
+       try {
+           Statement s = db.mycon().createStatement();
+           ResultSet rs = s.executeQuery("SELECT * FROM users WHERE student_id = '" + studentID + "'");
+           if (rs.next()) {
+               JOptionPane.showMessageDialog(this, "This student ID is already registered.", "Registration Error", JOptionPane.ERROR_MESSAGE);
+               return false;
+           }
+       } catch (Exception e) {
+           System.err.println("Got an exception!");
+           System.err.println(e.getMessage());
+       }
         return true;
-    }
+  }
+
 
     
     /**
