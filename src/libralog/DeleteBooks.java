@@ -25,6 +25,12 @@ public class DeleteBooks extends javax.swing.JFrame {
         
         this.setTitle("Delete Books | LibraLog");
         this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
+        
+        
+        
+        txtBookTitle.setEditable(false);
+        txtAuthor.setEditable(false);
+        txtQuantity.setEditable(false);
     }
 
     /**
@@ -151,7 +157,7 @@ public class DeleteBooks extends javax.swing.JFrame {
         btnDisplayBook.setBackground(new java.awt.Color(81, 114, 149));
         btnDisplayBook.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         btnDisplayBook.setForeground(new java.awt.Color(170, 215, 230));
-        btnDisplayBook.setText("Display");
+        btnDisplayBook.setText("Display Details");
         btnDisplayBook.setBorder(null);
         btnDisplayBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,7 +214,7 @@ public class DeleteBooks extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,9 +225,9 @@ public class DeleteBooks extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        StaffLogin sl = new StaffLogin();
+        StaffMainMenu smm = new StaffMainMenu();
         this.setVisible(false);
-        sl.setVisible(true);
+        smm.setVisible(true);
 
     }//GEN-LAST:event_backBtnActionPerformed
 

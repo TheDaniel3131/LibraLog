@@ -109,28 +109,20 @@ public class BookManagement {
         }
     }
 
-    public static void editBook(int bookId, String title, String author, int copies) {
+    public static void modifyBook(int bookID, String title, String author, int copies) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             String sql = "UPDATE books SET title = ?, author = ?, copies_available = ? WHERE book_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, title);
                 preparedStatement.setString(2, author);
                 preparedStatement.setInt(3, copies);
-                preparedStatement.setInt(4, bookId);
-                int rowsAffected = preparedStatement.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    System.out.println("Book edited successfully.");
-                } else {
-                    System.out.println("No book found with the given ID.");
-                }
+                preparedStatement.setInt(4, bookID);
+                preparedStatement.executeUpdate();
+                System.out.println("Book modified successfully.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.err.println("Failed to edit book.");
+            System.err.println("Failed to modify book.");
         }
     }
-
-
-    
 }

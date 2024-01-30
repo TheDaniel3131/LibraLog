@@ -226,9 +226,9 @@ public class ViewBooks extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        StaffLogin sl = new StaffLogin();
+        StaffMainMenu smm = new StaffMainMenu();
         this.setVisible(false);
-        sl.setVisible(true);
+        smm.setVisible(true);
         
     }//GEN-LAST:event_backBtnActionPerformed
 

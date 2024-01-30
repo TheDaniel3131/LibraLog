@@ -10,10 +10,10 @@ package libralog;
  */
 public class Book {
 
-    private int bookID;
-    private String title;
-    private String author;
-    private int copiesAvailable;
+    private final int bookID;
+    private final String title;
+    private final String author;
+    private final int copiesAvailable;
 
     public Book(int bookID, String title, String author, int copiesAvailable) {
         this.bookID = bookID;
