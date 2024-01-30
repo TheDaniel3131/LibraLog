@@ -35,7 +35,7 @@ public class MainMenu extends javax.swing.JFrame {
     
     public MainMenu() {
         initComponents();
-        this.setSize(850, 650);
+        this.setSize(850, 700);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
@@ -88,7 +88,7 @@ public class MainMenu extends javax.swing.JFrame {
     // Created Constructor. Allowing to pass Student ID from login to Main Menu here.
     MainMenu(String studentID) {
         this();
-        showStudentID.setText("Hello, " +studentID);
+        showStudentID.setText(studentID);
     }
 
     /**
@@ -102,7 +102,6 @@ public class MainMenu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        showStudentID = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -116,6 +115,8 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         btnReturnBook = new javax.swing.JButton();
         btnBorrowBook = new javax.swing.JButton();
+        showStudentID = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,12 +133,6 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(20, 40, 190, 40);
 
-        showStudentID.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        showStudentID.setForeground(new java.awt.Color(224, 226, 152));
-        showStudentID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(showStudentID);
-        showStudentID.setBounds(410, 20, 190, 30);
-
         jLabel16.setFont(new java.awt.Font("Poppins", 1, 15)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(238, 237, 235));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -145,12 +140,12 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.add(jLabel16);
         jLabel16.setBounds(10, 600, 380, 30);
 
-        jLabel5.setFont(new java.awt.Font("Poppins", 1, 22)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(224, 205, 210));
+        jLabel5.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(224, 226, 152));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Welcome to LibraLog Library!");
+        jLabel5.setText("Welcome,");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(70, 70, 640, 30);
+        jLabel5.setBounds(310, 20, 190, 30);
 
         jLabel6.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(224, 205, 210));
@@ -288,6 +283,19 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.add(btnBorrowBook);
         btnBorrowBook.setBounds(50, 460, 170, 40);
 
+        showStudentID.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        showStudentID.setForeground(new java.awt.Color(224, 226, 152));
+        showStudentID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(showStudentID);
+        showStudentID.setBounds(410, 20, 190, 30);
+
+        jLabel7.setFont(new java.awt.Font("Poppins", 1, 22)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(224, 205, 210));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Welcome to LibraLog Library!");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(70, 70, 640, 30);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -309,7 +317,13 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void btnCheckHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckHistoryActionPerformed
-        // TODO add your handling code here:
+        String studentID = showStudentID.getText();
+        
+        // Passing Student ID value to Main Menu.
+        this.setVisible(false);
+        MyBookHistory mbh = new MyBookHistory(studentID);
+        mbh.setVisible(true);
+        // new MainMenu(studentID).setVisible(true);    
     }//GEN-LAST:event_btnCheckHistoryActionPerformed
 
     private void btnSearchNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNowActionPerformed
@@ -333,16 +347,19 @@ public class MainMenu extends javax.swing.JFrame {
         if (selectedRowIndex != -1) {
             // Assuming 'tbViewBooks' is your JTable and column 0 is the book ID
             int bookID = (int) tbViewBooks.getValueAt(selectedRowIndex, 0);
+            String title = (String) tbViewBooks.getValueAt(selectedRowIndex, 1);
+            String author = (String) tbViewBooks.getValueAt(selectedRowIndex, 2);
 
             try {
                 Statement s = db.mycon().createStatement();
                 s.executeUpdate("UPDATE books SET copies_available = copies_available + 1 WHERE book_id = " + bookID);
+                s.executeUpdate("INSERT INTO pasthistory (studentID, bookID, title, author, status) VALUES ('" + showStudentID.getText() + "', " + bookID + ", '" + title + "', '" + author + "', 'return')");
                 JOptionPane.showMessageDialog(rootPane, "The book has been returned.", "Success!", JOptionPane.INFORMATION_MESSAGE);
 
                 // Refresh JFrame
                 this.setVisible(false);
                 this.dispose();
-                MainMenu mm = new MainMenu();
+                MainMenu mm = new MainMenu(showStudentID.getText());
                 mm.setVisible(true);
 
             } catch (Exception e) {
@@ -362,10 +379,13 @@ public class MainMenu extends javax.swing.JFrame {
         if (selectedRowIndex != -1) {
             // Assuming 'tbViewBooks' is your JTable and column 0 is the book ID
             int bookID = (int) tbViewBooks.getValueAt(selectedRowIndex, 0);
-
+            String title = (String) tbViewBooks.getValueAt(selectedRowIndex, 1);
+            String author = (String) tbViewBooks.getValueAt(selectedRowIndex, 2);
+           
             try {
                 Statement s = db.mycon().createStatement();
                 s.executeUpdate("UPDATE books SET copies_available = copies_available - 1 WHERE book_id = " + bookID);
+                s.executeUpdate("INSERT INTO pasthistory (studentID, bookID, title, author, status) VALUES ('" + showStudentID.getText() + "', " + bookID + ", '" + title + "', '" + author + "', 'borrow')");
                 int confirm = JOptionPane.showConfirmDialog(rootPane, "The book has been borrowed. Continue?", "Borrowing Book Confirmation", JOptionPane.YES_NO_OPTION);
 
                 if (confirm == JOptionPane.YES_OPTION) {
@@ -383,8 +403,10 @@ public class MainMenu extends javax.swing.JFrame {
                 // Refresh JFrame
                 this.setVisible(false);
                 this.dispose();
-                MainMenu mm = new MainMenu();
+                MainMenu mm = new MainMenu(showStudentID.getText());
                 mm.setVisible(true);
+                
+                
                 
 
             } catch (Exception e) {
@@ -443,6 +465,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel showStudentID;
