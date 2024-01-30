@@ -4,9 +4,12 @@
  */
 package libralog;
 
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,14 +32,50 @@ public class ViewBooks extends javax.swing.JFrame {
     
     public ViewBooks() {
         initComponents();
-        this.setSize(770, 450);
+        this.setSize(1000, 520);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
         
-        this.setTitle("Login As Staff | LibraLog");
+        this.setTitle("View Books | LibraLog");
         this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
         
+        con = db.mycon();
+        
+        // View Books Table
+        tbViewBooks.getTableHeader().setFont(new Font("Poppins", Font.BOLD, 16));
+        tbViewBooks.getTableHeader().setBackground(new Color(36,56,62));
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("Book ID");
+        tableModel.addColumn("Title");
+        tableModel.addColumn("Author");
+        tableModel.addColumn("Quantity");
+        tbViewBooks.setModel(tableModel);
+
+        // Retrieve Books Information from Books
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/libralog", "root", "")) {
+            String sql = "SELECT * FROM books";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    // Iterate through the result set and add rows to the DefaultTableModel
+                    tableModel.setRowCount(0); // Clear existing rows
+
+                    while (resultSet.next()) {
+                        // Add each row of book information to the DefaultTableModel
+                        Object[] row = {
+                            resultSet.getInt("book_id"),
+                            resultSet.getString("title"),
+                            resultSet.getString("author"),
+                            resultSet.getInt("copies_available")
+                        };
+                        tableModel.addRow(row);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Failed to view books.");
+        }
         con = db.mycon();
     }
             
@@ -53,14 +92,13 @@ public class ViewBooks extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
-        txtStaffUsername = new javax.swing.JTextField();
-        submitBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbViewBooks = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        submitBtn = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,76 +108,63 @@ public class ViewBooks extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 30)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(190, 199, 224));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("LibraLog Staff Login");
+        jLabel3.setText("LibraLog - View Books");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(30, 30, 370, 40);
 
         jPanel5.setBackground(new java.awt.Color(50, 67, 72));
         jPanel5.setLayout(null);
 
-        jLabel14.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(238, 237, 235));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Password:");
-        jPanel5.add(jLabel14);
-        jLabel14.setBounds(60, 80, 100, 30);
+        tbViewBooks.setAutoCreateRowSorter(true);
+        tbViewBooks.setBackground(new java.awt.Color(71, 99, 129));
+        tbViewBooks.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
+        tbViewBooks.setForeground(new java.awt.Color(147, 192, 202));
+        tbViewBooks.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Book ID", "Book Title", "Author Name", "Quantity"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        jLabel15.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(238, 237, 235));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Username:");
-        jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel5.add(jLabel15);
-        jLabel15.setBounds(50, 30, 110, 30);
-
-        jLabel16.setFont(new java.awt.Font("Poppins", 1, 15)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(238, 237, 235));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Check email @: management@LibraLog.com");
-        jPanel5.add(jLabel16);
-        jLabel16.setBounds(-80, 190, 600, 30);
-
-        txtPassword.setBackground(new java.awt.Color(100, 108, 116));
-        txtPassword.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
-        txtPassword.setForeground(new java.awt.Color(224, 205, 210));
-        txtPassword.setAlignmentX(0.0F);
-        txtPassword.setAlignmentY(-0.0F);
-        txtPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel5.add(txtPassword);
-        txtPassword.setBounds(170, 80, 161, 33);
-
-        txtStaffUsername.setBackground(new java.awt.Color(100, 108, 116));
-        txtStaffUsername.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
-        txtStaffUsername.setForeground(new java.awt.Color(224, 205, 210));
-        txtStaffUsername.setAlignmentX(0.0F);
-        txtStaffUsername.setAlignmentY(0.0F);
-        txtStaffUsername.setAutoscrolls(false);
-        txtStaffUsername.setBorder(null);
-        jPanel5.add(txtStaffUsername);
-        txtStaffUsername.setBounds(170, 30, 161, 33);
-
-        submitBtn.setBackground(new java.awt.Color(81, 114, 149));
-        submitBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        submitBtn.setForeground(new java.awt.Color(170, 215, 230));
-        submitBtn.setText("Submit");
-        submitBtn.setBorder(null);
-        submitBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitBtnActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jPanel5.add(submitBtn);
-        submitBtn.setBounds(130, 140, 170, 40);
+        jScrollPane1.setViewportView(tbViewBooks);
+        if (tbViewBooks.getColumnModel().getColumnCount() > 0) {
+            tbViewBooks.getColumnModel().getColumn(0).setMinWidth(10);
+        }
+
+        jPanel5.add(jScrollPane1);
+        jScrollPane1.setBounds(0, 0, 720, 270);
 
         jPanel1.add(jPanel5);
-        jPanel5.setBounds(37, 135, 460, 250);
+        jPanel5.setBounds(37, 115, 720, 270);
 
         jLabel5.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(101, 106, 184));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("*Only Admin or Staff Can Login*");
+        jLabel5.setText("Come & Check Our LibraLog Books. Everyone Can Read!");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(-90, 70, 600, 30);
+        jLabel5.setBounds(0, 70, 600, 30);
 
         backBtn.setBackground(new java.awt.Color(60, 54, 51));
         backBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
@@ -153,6 +178,39 @@ public class ViewBooks extends javax.swing.JFrame {
         });
         jPanel1.add(backBtn);
         backBtn.setBounds(600, 30, 120, 40);
+
+        jLabel16.setFont(new java.awt.Font("Poppins", 1, 15)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(238, 237, 235));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("For more information, contact us at email @: library@LibraLog.com");
+        jPanel1.add(jLabel16);
+        jLabel16.setBounds(40, 410, 540, 30);
+
+        submitBtn.setBackground(new java.awt.Color(81, 114, 149));
+        submitBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        submitBtn.setForeground(new java.awt.Color(170, 215, 230));
+        submitBtn.setText("Submit");
+        submitBtn.setBorder(null);
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(submitBtn);
+        submitBtn.setBounds(780, 120, 170, 40);
+
+        btnLogout.setBackground(new java.awt.Color(60, 54, 51));
+        btnLogout.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(170, 204, 230));
+        btnLogout.setText("Logout");
+        btnLogout.setBorder(null);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogout);
+        btnLogout.setBounds(740, 30, 120, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,46 +227,21 @@ public class ViewBooks extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        Home home = new Home();
+        StaffLogin sl = new StaffLogin();
         this.setVisible(false);
-        home.setVisible(true);
+        sl.setVisible(true);
         
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        String staffUsername = txtStaffUsername.getText();
-        String password = txtPassword.getText();
-        
-        try {
-            String query = "SELECT * from staffs WHERE username=? AND password=?";
-            ps = con.prepareCall(query);
-            ps.setString(1, staffUsername);
-            ps.setString(2, password);
-            
-            rs = ps.executeQuery();
-            
-            if(rs.next()){
-              JOptionPane.showMessageDialog(rootPane, "You Have Logged In To Our System.", "Success!", JOptionPane.INFORMATION_MESSAGE);
-              
-              // Passing Student ID value to Main Menu.
-              StaffMainMenu smm = new StaffMainMenu(staffUsername);
-              smm.setVisible(true);
-//              new MainMenu(studentID).setVisible(true);
-              this.setVisible(false);   
-              
-            } else if (staffUsername.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please enter both username and password.", "Empty Fills", JOptionPane.ERROR_MESSAGE);
-            
-            } else{
-              JOptionPane.showMessageDialog(rootPane, "Your StudentID or Password is Incorrect.", "Failed!", JOptionPane.ERROR_MESSAGE);  
-              return;
-            }
-            
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
+
     }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        Home hm = new Home();
+        this.setVisible(false);
+        hm.setVisible(true);
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,15 +283,14 @@ public class ViewBooks extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton submitBtn;
-    private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtStaffUsername;
+    private javax.swing.JTable tbViewBooks;
     // End of variables declaration//GEN-END:variables
 }

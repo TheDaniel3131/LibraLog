@@ -22,7 +22,7 @@ public class StaffMainMenu extends javax.swing.JFrame {
         this.setVisible(true);
         this.setResizable(false);
         
-        this.setTitle("Staff Main Menu | LibraLog");
+        this.setTitle("Staff/Admin Main Menu | LibraLog");
         this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
     }
 
@@ -47,7 +47,7 @@ public class StaffMainMenu extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        btnModifyBooks = new javax.swing.JButton();
+        btnEditBooks = new javax.swing.JButton();
         btnAddBooks = new javax.swing.JButton();
         btnDeleteBooks2 = new javax.swing.JButton();
         btnViewBooks = new javax.swing.JButton();
@@ -92,18 +92,18 @@ public class StaffMainMenu extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(36, 56, 62));
         jPanel3.setLayout(null);
 
-        btnModifyBooks.setBackground(new java.awt.Color(81, 114, 149));
-        btnModifyBooks.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        btnModifyBooks.setForeground(new java.awt.Color(170, 215, 230));
-        btnModifyBooks.setText("Edit Books");
-        btnModifyBooks.setBorder(null);
-        btnModifyBooks.addActionListener(new java.awt.event.ActionListener() {
+        btnEditBooks.setBackground(new java.awt.Color(81, 114, 149));
+        btnEditBooks.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnEditBooks.setForeground(new java.awt.Color(170, 215, 230));
+        btnEditBooks.setText("Edit Books");
+        btnEditBooks.setBorder(null);
+        btnEditBooks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModifyBooksActionPerformed(evt);
+                btnEditBooksActionPerformed(evt);
             }
         });
-        jPanel3.add(btnModifyBooks);
-        btnModifyBooks.setBounds(50, 280, 210, 40);
+        jPanel3.add(btnEditBooks);
+        btnEditBooks.setBounds(50, 280, 210, 40);
 
         btnAddBooks.setBackground(new java.awt.Color(81, 114, 149));
         btnAddBooks.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
@@ -283,36 +283,52 @@ public class StaffMainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void btnViewUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUsersActionPerformed
-        // TODO add your handling code here:
+        ViewUsers vu = new ViewUsers();
+        this.setVisible(false);
+        vu.setVisible(true);
     }//GEN-LAST:event_btnViewUsersActionPerformed
 
     private void btnDeleteUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUsersActionPerformed
-        // TODO add your handling code here:
+        DeleteUsers du = new DeleteUsers();
+        this.setVisible(false);
+        du.setVisible(true);
     }//GEN-LAST:event_btnDeleteUsersActionPerformed
 
     private void btnAddUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUsersActionPerformed
-        // TODO add your handling code here:
+        AddUsers au = new AddUsers();
+        this.setVisible(false);
+        au.setVisible(true);
     }//GEN-LAST:event_btnAddUsersActionPerformed
 
     private void btnEditUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUsersActionPerformed
-        // TODO add your handling code here:
+        EditUsers eu = new EditUsers();
+        this.setVisible(false);
+        eu.setVisible(true);
     }//GEN-LAST:event_btnEditUsersActionPerformed
 
     private void btnViewBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBooksActionPerformed
-        // TODO add your handling code here:
+        ViewBooks vb = new ViewBooks();
+        this.setVisible(false);
+        vb.setVisible(true);
     }//GEN-LAST:event_btnViewBooksActionPerformed
 
     private void btnDeleteBooks2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBooks2ActionPerformed
-        // TODO add your handling code here:
+        DeleteBooks db = new DeleteBooks();
+        this.setVisible(false);
+        db.setVisible(true);
     }//GEN-LAST:event_btnDeleteBooks2ActionPerformed
 
     private void btnAddBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBooksActionPerformed
-        // TODO add your handling code here:
+        AddBooks ab = new AddBooks();
+        this.setVisible(false);
+        ab.setVisible(true);
     }//GEN-LAST:event_btnAddBooksActionPerformed
 
-    private void btnModifyBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyBooksActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModifyBooksActionPerformed
+    private void btnEditBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditBooksActionPerformed
+        EditBooks eb = new EditBooks();
+        this.setVisible(false);
+        eb.setVisible(true);
+    }//GEN-LAST:event_btnEditBooksActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,8 +372,8 @@ public class StaffMainMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnAddUsers;
     private javax.swing.JButton btnDeleteBooks2;
     private javax.swing.JButton btnDeleteUsers;
+    private javax.swing.JButton btnEditBooks;
     private javax.swing.JButton btnEditUsers;
-    private javax.swing.JButton btnModifyBooks;
     private javax.swing.JButton btnViewBooks;
     private javax.swing.JButton btnViewUsers;
     private javax.swing.JLabel jLabel16;
