@@ -35,7 +35,7 @@ public class AddUsers extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter both staff username and password.", "Registration Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-s
+
         // Check the length of the staff username and password
         if (staffUsername.length() < 5 || password.length() < 8) {
             JOptionPane.showMessageDialog(this, "Staff username and the password must be at least 8 characters long with at least one number, one lowercase letter, and one uppercase letter.", "Registration Error", JOptionPane.ERROR_MESSAGE);
