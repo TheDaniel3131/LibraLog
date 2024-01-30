@@ -112,15 +112,15 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(850, 600));
         jPanel1.setLayout(null);
 
-        jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 34)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(224, 204, 190));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("LibraLog");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 30, 160, 40);
+        jLabel3.setBounds(20, 40, 190, 40);
 
         showStudentID.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        showStudentID.setForeground(new java.awt.Color(224, 205, 210));
+        showStudentID.setForeground(new java.awt.Color(224, 226, 152));
         showStudentID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(showStudentID);
         showStudentID.setBounds(410, 20, 190, 30);
