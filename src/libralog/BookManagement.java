@@ -12,9 +12,9 @@ import java.sql.*;
  */
 public class BookManagement {
     // Connection details, update these with your database credentials
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/library";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/libralog";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "your_password";
+    private static final String DB_PASSWORD = "";
 
     public static void viewBooks() {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
@@ -37,19 +37,56 @@ public class BookManagement {
         }
     }
     
-    public static void addBook(String title, String author, int copies) {
+    public static int addBook(String title, String author, int copies) {
+        int generatedBookID = -1; // Initialize with a default value
+
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
             String sql = "INSERT INTO books (title, author, copies_available) VALUES (?, ?, ?)";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, title);
                 preparedStatement.setString(2, author);
                 preparedStatement.setInt(3, copies);
                 preparedStatement.executeUpdate();
-                System.out.println("Book added successfully.");
+
+                // Retrieve the generated book ID
+                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        generatedBookID = generatedKeys.getInt(1);
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             System.err.println("Failed to add book.");
+        }
+
+        return generatedBookID;
+    }
+   
+    public static Book getBookDetails(int bookID) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+            String sql = "SELECT * FROM books WHERE book_id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, bookID);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        // Retrieve book details from the result set
+                        String title = resultSet.getString("title");
+                        String author = resultSet.getString("author");
+                        int copiesAvailable = resultSet.getInt("copies_available");
+
+                        // Create and return a Book object with the details
+                        return new Book(bookID, title, author, copiesAvailable);
+                    } else {
+                        // Book with the given ID not found
+                        return null;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Failed to get book details.");
+            return null;
         }
     }
     

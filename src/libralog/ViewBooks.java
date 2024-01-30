@@ -115,7 +115,6 @@ public class ViewBooks extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(50, 67, 72));
         jPanel5.setLayout(null);
 
-        tbViewBooks.setAutoCreateRowSorter(true);
         tbViewBooks.setBackground(new java.awt.Color(71, 99, 129));
         tbViewBooks.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
         tbViewBooks.setForeground(new java.awt.Color(147, 192, 202));
