@@ -4,91 +4,17 @@
  */
 package libralog;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.*;
-import javax.swing.ImageIcon;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.table.TableRowSorter;
-
 /**
  *
  * @author Daniel
  */
-public class MainMenu extends javax.swing.JFrame {
+public class MyBookHistory extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainMenu
+     * Creates new form MyBookHistory
      */
-    Connection con = null;
-    ResultSet rs = null;
-    PreparedStatement ps = null;
-    
-    public MainMenu() {
+    public MyBookHistory() {
         initComponents();
-        this.setSize(850, 650);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        this.setResizable(false);
-        
-        this.setTitle("Main Menu | LibraLog");
-        this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
-    
-        // View Books Table
-        tbViewBooks.getTableHeader().setFont(new Font("Poppins", Font.BOLD, 16));
-        tbViewBooks.getTableHeader().setBackground(new Color(36,56,62));
-        DefaultTableModel tableModel = new DefaultTableModel();
-        tableModel.addColumn("Book ID");
-        tableModel.addColumn("Title");
-        tableModel.addColumn("Author");
-        tableModel.addColumn("Quantity");
-        tbViewBooks.setModel(tableModel);
-     
-        // Set connection 
-        
-        con = db.mycon();
-        
-        // Retrieve Books Information from Books
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/libralog", "root", "")) {
-            String sql = "SELECT * FROM books";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    // Iterate through the result set and add rows to the DefaultTableModel
-                    tableModel.setRowCount(0); // Clear existing rows
-
-                    while (resultSet.next()) {
-                        // Add each row of book information to the DefaultTableModel
-                        Object[] row = {
-                            resultSet.getInt("book_id"),
-                            resultSet.getString("title"),
-                            resultSet.getString("author"),
-                            resultSet.getInt("copies_available")
-                        };
-                        tableModel.addRow(row);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.err.println("Failed to view books.");
-        }
-        con = db.mycon();
-    
-    }
-
-    // Created Constructor. Allowing to pass Student ID from login to Main Menu here.
-    MainMenu(String studentID) {
-        this();
-        showStudentID.setText("Hello, " +studentID);
     }
 
     /**
@@ -109,20 +35,17 @@ public class MainMenu extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbViewBooks = new javax.swing.JTable();
-        btnCheckHistory = new javax.swing.JButton();
         btnSearchNow = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         txtSearchBook = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        btnReturnBook = new javax.swing.JButton();
-        btnBorrowBook = new javax.swing.JButton();
+        backBtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(116, 114, 100));
         jPanel1.setForeground(new java.awt.Color(224, 205, 210));
         jPanel1.setMinimumSize(new java.awt.Dimension(850, 600));
-        jPanel1.setPreferredSize(new java.awt.Dimension(850, 600));
         jPanel1.setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 36)); // NOI18N
@@ -148,16 +71,16 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Poppins", 1, 22)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(224, 205, 210));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Welcome to LibraLog Library!");
+        jLabel5.setText("My Past Book History");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(70, 70, 640, 30);
+        jLabel5.setBounds(140, 70, 640, 30);
 
         jLabel6.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(224, 205, 210));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Come & Check Our LibraLog Books. Everyone Can Read.");
+        jLabel6.setText("Here Are Your Borrowed/Past Books From LibraLog Library:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(0, 100, 600, 30);
+        jLabel6.setBounds(10, 100, 600, 30);
 
         backBtn.setBackground(new java.awt.Color(60, 54, 51));
         backBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
@@ -210,19 +133,6 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(40, 150, 720, 270);
 
-        btnCheckHistory.setBackground(new java.awt.Color(149, 119, 81));
-        btnCheckHistory.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        btnCheckHistory.setForeground(new java.awt.Color(230, 208, 170));
-        btnCheckHistory.setText("Check My Book History");
-        btnCheckHistory.setBorder(null);
-        btnCheckHistory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheckHistoryActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCheckHistory);
-        btnCheckHistory.setBounds(50, 520, 370, 40);
-
         btnSearchNow.setBackground(new java.awt.Color(149, 119, 81));
         btnSearchNow.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         btnSearchNow.setForeground(new java.awt.Color(230, 208, 170));
@@ -234,7 +144,7 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSearchNow);
-        btnSearchNow.setBounds(470, 530, 170, 40);
+        btnSearchNow.setBounds(420, 530, 340, 40);
 
         jLabel15.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(230, 208, 170));
@@ -242,7 +152,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel15.setText("Search Book Name");
         jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(jLabel15);
-        jLabel15.setBounds(530, 440, 200, 30);
+        jLabel15.setBounds(490, 440, 200, 30);
 
         txtSearchBook.setBackground(new java.awt.Color(60, 54, 51));
         txtSearchBook.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
@@ -252,7 +162,7 @@ public class MainMenu extends javax.swing.JFrame {
         txtSearchBook.setAutoscrolls(false);
         txtSearchBook.setBorder(null);
         jPanel1.add(txtSearchBook);
-        txtSearchBook.setBounds(580, 480, 220, 33);
+        txtSearchBook.setBounds(540, 480, 220, 33);
 
         jLabel17.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(238, 237, 235));
@@ -260,33 +170,20 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel17.setText("Book Title:");
         jLabel17.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.add(jLabel17);
-        jLabel17.setBounds(460, 480, 110, 30);
+        jLabel17.setBounds(420, 480, 110, 30);
 
-        btnReturnBook.setBackground(new java.awt.Color(149, 119, 81));
-        btnReturnBook.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        btnReturnBook.setForeground(new java.awt.Color(230, 208, 170));
-        btnReturnBook.setText("Return Book");
-        btnReturnBook.setBorder(null);
-        btnReturnBook.addActionListener(new java.awt.event.ActionListener() {
+        backBtn1.setBackground(new java.awt.Color(60, 54, 51));
+        backBtn1.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        backBtn1.setForeground(new java.awt.Color(224, 205, 210));
+        backBtn1.setText("Back");
+        backBtn1.setBorder(null);
+        backBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReturnBookActionPerformed(evt);
+                backBtn1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnReturnBook);
-        btnReturnBook.setBounds(250, 460, 170, 40);
-
-        btnBorrowBook.setBackground(new java.awt.Color(149, 119, 81));
-        btnBorrowBook.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        btnBorrowBook.setForeground(new java.awt.Color(230, 208, 170));
-        btnBorrowBook.setText("Borrow Book");
-        btnBorrowBook.setBorder(null);
-        btnBorrowBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBorrowBookActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnBorrowBook);
-        btnBorrowBook.setBounds(50, 460, 170, 40);
+        jPanel1.add(backBtn1);
+        backBtn1.setBounds(630, 80, 120, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -308,10 +205,6 @@ public class MainMenu extends javax.swing.JFrame {
         sl.setVisible(true);
     }//GEN-LAST:event_backBtnActionPerformed
 
-    private void btnCheckHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckHistoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCheckHistoryActionPerformed
-
     private void btnSearchNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchNowActionPerformed
         String filter = txtSearchBook.getText();
         TableRowSorter<DefaultTableModel> trs = new TableRowSorter<>((DefaultTableModel) tbViewBooks.getModel());
@@ -324,43 +217,12 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchNowActionPerformed
 
-    private void btnReturnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnBookActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReturnBookActionPerformed
+    private void backBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtn1ActionPerformed
+        MainMenu mm = new MainMenu();
+        this.setVisible(false);
+        mm.setVisible(true);
 
-    private void btnBorrowBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrowBookActionPerformed
-        // Get the selected row index
-        int selectedRowIndex = tbViewBooks.getSelectedRow();
-
-        // Check if a row is actually selected
-        if (selectedRowIndex != -1) {
-            // Assuming 'tbViewBooks' is your JTable and column 0 is the book ID
-            int bookID = (int) tbViewBooks.getValueAt(selectedRowIndex, 0);
-
-            try {
-                Statement s = db.mycon().createStatement();
-                s.executeUpdate("UPDATE books SET copies_available = copies_available - 1 WHERE book_id = " + bookID);
-                JOptionPane.showMessageDialog(rootPane, "The book has been borrowed.", "Success!", JOptionPane.INFORMATION_MESSAGE);
-                
-                // SwingUtilities.updateComponentTreeUI(this);
-                // this.invalidate();
-                // this.validate();
-                // this.repaint();
-                
-                this.setVisible(false);
-                this.dispose();
-                MainMenu mm = new MainMenu();
-                mm.setVisible(true);
-                
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(rootPane, "An error occurred while trying to borrow the book.");
-                System.out.println(e);
-            }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Please select a book to borrow.");
-        }
-    }//GEN-LAST:event_btnBorrowBookActionPerformed
+    }//GEN-LAST:event_backBtn1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,29 +241,27 @@ public class MainMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MyBookHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MyBookHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MyBookHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MyBookHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
+                new MyBookHistory().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
-    private javax.swing.JButton btnBorrowBook;
-    private javax.swing.JButton btnCheckHistory;
-    private javax.swing.JButton btnReturnBook;
+    private javax.swing.JButton backBtn1;
     private javax.swing.JButton btnSearchNow;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
