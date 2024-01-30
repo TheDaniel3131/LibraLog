@@ -325,7 +325,33 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchNowActionPerformed
 
     private void btnReturnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnBookActionPerformed
-        // TODO add your handling code here:
+           
+        // Get the selected row index
+        int selectedRowIndex = tbViewBooks.getSelectedRow();
+
+        // Check if a row is actually selected
+        if (selectedRowIndex != -1) {
+            // Assuming 'tbViewBooks' is your JTable and column 0 is the book ID
+            int bookID = (int) tbViewBooks.getValueAt(selectedRowIndex, 0);
+
+            try {
+                Statement s = db.mycon().createStatement();
+                s.executeUpdate("UPDATE books SET copies_available = copies_available + 1 WHERE book_id = " + bookID);
+                JOptionPane.showMessageDialog(rootPane, "The book has been returned.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+
+                // Refresh JFrame
+                this.setVisible(false);
+                this.dispose();
+                MainMenu mm = new MainMenu();
+                mm.setVisible(true);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, "An error occurred while trying to return the book.");
+                System.out.println(e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Please select a book to return.");
+        }
     }//GEN-LAST:event_btnReturnBookActionPerformed
 
     private void btnBorrowBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrowBookActionPerformed
@@ -354,6 +380,7 @@ public class MainMenu extends javax.swing.JFrame {
                 // this.validate();
                 // this.repaint();
                 
+                // Refresh JFrame
                 this.setVisible(false);
                 this.dispose();
                 MainMenu mm = new MainMenu();
