@@ -207,7 +207,7 @@ public class RegisterStudent extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         String studentID = txtStudentID.getText();
         String password = txtPassword.getText();
-        
+            
         boolean registerSuccessful = registerNewStudent(studentID, password);
         
         if (!registerSuccessful){

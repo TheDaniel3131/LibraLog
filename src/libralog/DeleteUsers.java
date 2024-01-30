@@ -5,6 +5,8 @@
 package libralog;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import java.sql.*;
 
 /**
  *
@@ -40,7 +42,7 @@ public class DeleteUsers extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        txtBookID = new javax.swing.JTextField();
+        txtStaffUsername = new javax.swing.JTextField();
         btnDeleteBook = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
@@ -69,14 +71,14 @@ public class DeleteUsers extends javax.swing.JFrame {
         jPanel5.add(jLabel19);
         jLabel19.setBounds(120, 30, 190, 30);
 
-        txtBookID.setBackground(new java.awt.Color(100, 108, 116));
-        txtBookID.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
-        txtBookID.setForeground(new java.awt.Color(224, 205, 210));
-        txtBookID.setAlignmentX(0.0F);
-        txtBookID.setAlignmentY(-0.0F);
-        txtBookID.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel5.add(txtBookID);
-        txtBookID.setBounds(100, 70, 220, 33);
+        txtStaffUsername.setBackground(new java.awt.Color(100, 108, 116));
+        txtStaffUsername.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
+        txtStaffUsername.setForeground(new java.awt.Color(224, 205, 210));
+        txtStaffUsername.setAlignmentX(0.0F);
+        txtStaffUsername.setAlignmentY(-0.0F);
+        txtStaffUsername.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel5.add(txtStaffUsername);
+        txtStaffUsername.setBounds(100, 70, 220, 33);
 
         btnDeleteBook.setBackground(new java.awt.Color(81, 114, 149));
         btnDeleteBook.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
@@ -149,7 +151,16 @@ public class DeleteUsers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBookActionPerformed
+        String staffUsername = txtStaffUsername.getText();
 
+        try {
+            Statement s = db.mycon().createStatement();
+            s.executeUpdate("DELETE FROM staffs WHERE username = '" + staffUsername + "'");
+            JOptionPane.showMessageDialog(rootPane, "The user has been deleted.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "An error occurred while trying to delete the user.");
+            System.out.println(e);
+        }
     }//GEN-LAST:event_btnDeleteBookActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -209,6 +220,6 @@ public class DeleteUsers extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField txtBookID;
+    private javax.swing.JTextField txtStaffUsername;
     // End of variables declaration//GEN-END:variables
 }
