@@ -41,10 +41,10 @@ public class Home extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         loginStaff = new javax.swing.JButton();
-        registerAccount = new javax.swing.JButton();
         loginStudent = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        registerAccount1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -94,19 +94,6 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(loginStaff);
         loginStaff.setBounds(90, 270, 260, 40);
 
-        registerAccount.setBackground(new java.awt.Color(60, 54, 51));
-        registerAccount.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        registerAccount.setForeground(new java.awt.Color(229, 225, 218));
-        registerAccount.setText("Register Account");
-        registerAccount.setBorder(null);
-        registerAccount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerAccountActionPerformed(evt);
-            }
-        });
-        jPanel1.add(registerAccount);
-        registerAccount.setBounds(90, 150, 260, 40);
-
         loginStudent.setBackground(new java.awt.Color(60, 54, 51));
         loginStudent.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         loginStudent.setForeground(new java.awt.Color(229, 225, 218));
@@ -132,6 +119,19 @@ public class Home extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(80, 70, 600, 30);
 
+        registerAccount1.setBackground(new java.awt.Color(60, 54, 51));
+        registerAccount1.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        registerAccount1.setForeground(new java.awt.Color(229, 225, 218));
+        registerAccount1.setText("Register Account");
+        registerAccount1.setBorder(null);
+        registerAccount1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerAccount1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(registerAccount1);
+        registerAccount1.setBounds(90, 150, 260, 40);
+
         getContentPane().add(jPanel1);
         jPanel1.setBounds(-20, 0, 810, 460);
 
@@ -145,19 +145,16 @@ public class Home extends javax.swing.JFrame {
        ls.setFocusable(true);
     }//GEN-LAST:event_loginStudentActionPerformed
 
-    private void registerAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerAccountActionPerformed
-       RegisterStudent rs = new RegisterStudent();
-       this.setVisible(false);
-       rs.setVisible(true);
-       rs.setFocusable(true);
-    }//GEN-LAST:event_registerAccountActionPerformed
-
     private void loginStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginStaffActionPerformed
        StaffLogin lstaff = new StaffLogin();
        this.setVisible(false);
        lstaff.setVisible(true);
        lstaff.setFocusable(true);
     }//GEN-LAST:event_loginStaffActionPerformed
+
+    private void registerAccount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerAccount1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registerAccount1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +200,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginStaff;
     private javax.swing.JButton loginStudent;
-    private javax.swing.JButton registerAccount;
+    private javax.swing.JButton registerAccount1;
     // End of variables declaration//GEN-END:variables
 }

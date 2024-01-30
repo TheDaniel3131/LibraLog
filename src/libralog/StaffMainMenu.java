@@ -17,19 +17,19 @@ public class StaffMainMenu extends javax.swing.JFrame {
      */
     public StaffMainMenu() {
         initComponents();
-        this.setSize(770, 450);
+        this.setSize(850, 650);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
         
-        this.setTitle("Main Menu | LibraLog");
+        this.setTitle("Staff Main Menu | LibraLog");
         this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
     }
 
     // Created Constructor. Allowing to pass Student ID from login to Main Menu here.
-    StaffMainMenu(String studentID) {
+    StaffMainMenu(String staffUsername) {
         this();
-        showStudentID.setText("Welcome, " +studentID);
+        lblwelcomeStaff.setText("Welcome Back, " +staffUsername +".");
     }
 
     /**
@@ -43,92 +43,223 @@ public class StaffMainMenu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        lblwelcomeStaff = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        btnModifyBooks = new javax.swing.JButton();
+        btnAddBooks = new javax.swing.JButton();
+        btnDeleteBooks2 = new javax.swing.JButton();
+        btnViewBooks = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
-        txtStudentID = new javax.swing.JTextField();
-        submitBtn = new javax.swing.JButton();
-        showStudentID = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        btnEditUsers = new javax.swing.JButton();
+        btnAddUsers = new javax.swing.JButton();
+        btnDeleteUsers = new javax.swing.JButton();
+        btnViewUsers = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        backBtn = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(116, 114, 100));
+        jPanel1.setBackground(new java.awt.Color(71, 74, 79));
+        jPanel1.setPreferredSize(new java.awt.Dimension(850, 650));
         jPanel1.setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 30)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(224, 204, 190));
+        jLabel3.setForeground(new java.awt.Color(190, 199, 224));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("LibraLog");
+        jLabel3.setText("LibraLog - Library Management System");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 20, 150, 40);
+        jLabel3.setBounds(190, 30, 650, 40);
 
-        jPanel5.setBackground(new java.awt.Color(60, 54, 51));
+        lblwelcomeStaff.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        lblwelcomeStaff.setForeground(new java.awt.Color(101, 106, 184));
+        lblwelcomeStaff.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(lblwelcomeStaff);
+        lblwelcomeStaff.setBounds(200, 70, 320, 30);
+
+        jPanel5.setBackground(new java.awt.Color(50, 67, 72));
         jPanel5.setLayout(null);
 
-        jLabel14.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(238, 237, 235));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Password:");
-        jPanel5.add(jLabel14);
-        jLabel14.setBounds(60, 80, 100, 30);
+        jTabbedPane2.setBackground(new java.awt.Color(71, 99, 129));
+        jTabbedPane2.setForeground(new java.awt.Color(170, 215, 230));
+        jTabbedPane2.setFont(new java.awt.Font("Poppins", 1, 15)); // NOI18N
 
-        jLabel15.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(238, 237, 235));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Student ID:");
-        jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel5.add(jLabel15);
-        jLabel15.setBounds(50, 30, 110, 30);
+        jPanel3.setBackground(new java.awt.Color(36, 56, 62));
+        jPanel3.setLayout(null);
 
-        jLabel16.setFont(new java.awt.Font("Poppins", 1, 15)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(238, 237, 235));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("If any problem, email help@libralog.com");
-        jPanel5.add(jLabel16);
-        jLabel16.setBounds(-80, 190, 600, 30);
-
-        txtPassword.setBackground(new java.awt.Color(116, 114, 100));
-        txtPassword.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
-        txtPassword.setForeground(new java.awt.Color(224, 205, 210));
-        txtPassword.setAlignmentX(0.0F);
-        txtPassword.setAlignmentY(-0.0F);
-        txtPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel5.add(txtPassword);
-        txtPassword.setBounds(170, 80, 161, 33);
-
-        txtStudentID.setBackground(new java.awt.Color(116, 114, 100));
-        txtStudentID.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
-        txtStudentID.setForeground(new java.awt.Color(224, 205, 210));
-        txtStudentID.setAlignmentX(0.0F);
-        txtStudentID.setAlignmentY(0.0F);
-        txtStudentID.setAutoscrolls(false);
-        txtStudentID.setBorder(null);
-        jPanel5.add(txtStudentID);
-        txtStudentID.setBounds(170, 30, 161, 33);
-
-        submitBtn.setBackground(new java.awt.Color(149, 119, 81));
-        submitBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        submitBtn.setForeground(new java.awt.Color(230, 208, 170));
-        submitBtn.setText("Submit");
-        submitBtn.setBorder(null);
-        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnModifyBooks.setBackground(new java.awt.Color(81, 114, 149));
+        btnModifyBooks.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnModifyBooks.setForeground(new java.awt.Color(170, 215, 230));
+        btnModifyBooks.setText("Edit Books");
+        btnModifyBooks.setBorder(null);
+        btnModifyBooks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitBtnActionPerformed(evt);
+                btnModifyBooksActionPerformed(evt);
             }
         });
-        jPanel5.add(submitBtn);
-        submitBtn.setBounds(130, 140, 170, 40);
+        jPanel3.add(btnModifyBooks);
+        btnModifyBooks.setBounds(50, 280, 210, 40);
+
+        btnAddBooks.setBackground(new java.awt.Color(81, 114, 149));
+        btnAddBooks.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnAddBooks.setForeground(new java.awt.Color(170, 215, 230));
+        btnAddBooks.setText("Add Books");
+        btnAddBooks.setBorder(null);
+        btnAddBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddBooksActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnAddBooks);
+        btnAddBooks.setBounds(50, 160, 210, 40);
+
+        btnDeleteBooks2.setBackground(new java.awt.Color(81, 114, 149));
+        btnDeleteBooks2.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnDeleteBooks2.setForeground(new java.awt.Color(170, 215, 230));
+        btnDeleteBooks2.setText("Delete Books");
+        btnDeleteBooks2.setBorder(null);
+        btnDeleteBooks2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteBooks2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnDeleteBooks2);
+        btnDeleteBooks2.setBounds(50, 220, 210, 40);
+
+        btnViewBooks.setBackground(new java.awt.Color(81, 114, 149));
+        btnViewBooks.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnViewBooks.setForeground(new java.awt.Color(170, 215, 230));
+        btnViewBooks.setText("View Books");
+        btnViewBooks.setBorder(null);
+        btnViewBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewBooksActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnViewBooks);
+        btnViewBooks.setBounds(50, 100, 210, 40);
+
+        jLabel16.setFont(new java.awt.Font("Poppins SemiBold", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(238, 237, 235));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Manage & Handle All Types of Books using LibraLog's CRUD operations");
+        jPanel3.add(jLabel16);
+        jLabel16.setBounds(10, 40, 700, 30);
+
+        jLabel2.setFont(new java.awt.Font("Poppins Black", 0, 30)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(224, 204, 190));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\danie\\Documents\\NetBeansProjects\\LibraLog\\src\\libralog\\assets\\home_book.png")); // NOI18N
+        jLabel2.setToolTipText("");
+        jLabel2.setDoubleBuffered(true);
+        jPanel3.add(jLabel2);
+        jLabel2.setBounds(290, 100, 390, 220);
+
+        jTabbedPane2.addTab("Books Management", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(36, 56, 62));
+        jPanel4.setLayout(null);
+
+        btnEditUsers.setBackground(new java.awt.Color(81, 114, 149));
+        btnEditUsers.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnEditUsers.setForeground(new java.awt.Color(170, 215, 230));
+        btnEditUsers.setText("Delete Users");
+        btnEditUsers.setBorder(null);
+        btnEditUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditUsersActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnEditUsers);
+        btnEditUsers.setBounds(50, 280, 210, 40);
+
+        btnAddUsers.setBackground(new java.awt.Color(81, 114, 149));
+        btnAddUsers.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnAddUsers.setForeground(new java.awt.Color(170, 215, 230));
+        btnAddUsers.setText("Add Users");
+        btnAddUsers.setBorder(null);
+        btnAddUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddUsersActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnAddUsers);
+        btnAddUsers.setBounds(50, 160, 210, 40);
+
+        btnDeleteUsers.setBackground(new java.awt.Color(81, 114, 149));
+        btnDeleteUsers.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnDeleteUsers.setForeground(new java.awt.Color(170, 215, 230));
+        btnDeleteUsers.setText("Delete Users");
+        btnDeleteUsers.setBorder(null);
+        btnDeleteUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteUsersActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnDeleteUsers);
+        btnDeleteUsers.setBounds(50, 220, 210, 40);
+
+        btnViewUsers.setBackground(new java.awt.Color(81, 114, 149));
+        btnViewUsers.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnViewUsers.setForeground(new java.awt.Color(170, 215, 230));
+        btnViewUsers.setText("View Users");
+        btnViewUsers.setBorder(null);
+        btnViewUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewUsersActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnViewUsers);
+        btnViewUsers.setBounds(50, 100, 210, 40);
+
+        jLabel18.setFont(new java.awt.Font("Poppins SemiBold", 1, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(238, 237, 235));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("Manage All Types of Users In LibraLog with CRUD operations");
+        jPanel4.add(jLabel18);
+        jLabel18.setBounds(10, 40, 700, 30);
+
+        jLabel4.setFont(new java.awt.Font("Poppins Black", 0, 30)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(224, 204, 190));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\danie\\Documents\\NetBeansProjects\\LibraLog\\src\\libralog\\assets\\home_book.png")); // NOI18N
+        jLabel4.setToolTipText("");
+        jLabel4.setDoubleBuffered(true);
+        jPanel4.add(jLabel4);
+        jLabel4.setBounds(290, 100, 390, 220);
+
+        jTabbedPane2.addTab("Users Management", jPanel4);
+
+        jPanel5.add(jTabbedPane2);
+        jTabbedPane2.setBounds(10, 10, 720, 400);
 
         jPanel1.add(jPanel5);
-        jPanel5.setBounds(37, 135, 460, 250);
+        jPanel5.setBounds(37, 145, 740, 420);
 
-        showStudentID.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        showStudentID.setForeground(new java.awt.Color(224, 205, 210));
-        showStudentID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(showStudentID);
-        showStudentID.setBounds(470, 10, 190, 30);
+        backBtn.setBackground(new java.awt.Color(60, 54, 51));
+        backBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(170, 204, 230));
+        backBtn.setText("Logout");
+        backBtn.setBorder(null);
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(backBtn);
+        backBtn.setBounds(40, 30, 120, 40);
+
+        jLabel17.setFont(new java.awt.Font("Poppins", 1, 15)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(238, 237, 235));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Here are the staff/admin functionalities to use:");
+        jPanel1.add(jLabel17);
+        jLabel17.setBounds(-80, 100, 600, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,9 +275,44 @@ public class StaffMainMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        StaffLogin sl = new StaffLogin();
+        this.setVisible(false);
+        sl.setVisible(true);
 
-    }//GEN-LAST:event_submitBtnActionPerformed
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void btnViewUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUsersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewUsersActionPerformed
+
+    private void btnDeleteUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUsersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteUsersActionPerformed
+
+    private void btnAddUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddUsersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddUsersActionPerformed
+
+    private void btnEditUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUsersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditUsersActionPerformed
+
+    private void btnViewBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBooksActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewBooksActionPerformed
+
+    private void btnDeleteBooks2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBooks2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteBooks2ActionPerformed
+
+    private void btnAddBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBooksActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddBooksActionPerformed
+
+    private void btnModifyBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyBooksActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModifyBooksActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,15 +351,26 @@ public class StaffMainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JButton backBtn;
+    private javax.swing.JButton btnAddBooks;
+    private javax.swing.JButton btnAddUsers;
+    private javax.swing.JButton btnDeleteBooks2;
+    private javax.swing.JButton btnDeleteUsers;
+    private javax.swing.JButton btnEditUsers;
+    private javax.swing.JButton btnModifyBooks;
+    private javax.swing.JButton btnViewBooks;
+    private javax.swing.JButton btnViewUsers;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JLabel showStudentID;
-    private javax.swing.JButton submitBtn;
-    private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtStudentID;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JLabel lblwelcomeStaff;
     // End of variables declaration//GEN-END:variables
 }

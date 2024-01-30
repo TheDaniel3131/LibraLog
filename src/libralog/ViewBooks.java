@@ -13,7 +13,7 @@ import java.sql.*;
  * @author Daniel
  */
 
-public class StaffLogin extends javax.swing.JFrame {
+public class ViewBooks extends javax.swing.JFrame {
 
     /** 
      * Creates new form RegisterStudent
@@ -27,7 +27,7 @@ public class StaffLogin extends javax.swing.JFrame {
     ResultSet rs = null;
     PreparedStatement ps = null;
     
-    public StaffLogin() {
+    public ViewBooks() {
         initComponents();
         this.setSize(770, 450);
         this.setLocationRelativeTo(null);
@@ -227,21 +227,23 @@ public class StaffLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StaffLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StaffLogin().setVisible(true);
+                new ViewBooks().setVisible(true);
             }
         });
     }
