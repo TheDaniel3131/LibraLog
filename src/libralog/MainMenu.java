@@ -97,12 +97,16 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         showStudentID = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        submitBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbViewBooks = new javax.swing.JTable();
+        submitBtn1 = new javax.swing.JButton();
+        submitBtn2 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        txtStudentID = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,20 +134,7 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("If any problem, email help@libralog.com");
         jPanel1.add(jLabel16);
-        jLabel16.setBounds(20, 500, 380, 30);
-
-        submitBtn.setBackground(new java.awt.Color(149, 119, 81));
-        submitBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        submitBtn.setForeground(new java.awt.Color(230, 208, 170));
-        submitBtn.setText("Borrow Book");
-        submitBtn.setBorder(null);
-        submitBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(submitBtn);
-        submitBtn.setBounds(50, 440, 170, 40);
+        jLabel16.setBounds(20, 510, 380, 30);
 
         jLabel5.setFont(new java.awt.Font("Poppins", 1, 22)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(224, 205, 210));
@@ -208,7 +199,59 @@ public class MainMenu extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tbViewBooks);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(50, 140, 720, 270);
+        jScrollPane2.setBounds(40, 150, 720, 270);
+
+        submitBtn1.setBackground(new java.awt.Color(149, 119, 81));
+        submitBtn1.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        submitBtn1.setForeground(new java.awt.Color(230, 208, 170));
+        submitBtn1.setText("Borrow Book");
+        submitBtn1.setBorder(null);
+        submitBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtn1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(submitBtn1);
+        submitBtn1.setBounds(50, 450, 170, 40);
+
+        submitBtn2.setBackground(new java.awt.Color(149, 119, 81));
+        submitBtn2.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        submitBtn2.setForeground(new java.awt.Color(230, 208, 170));
+        submitBtn2.setText("Return Book");
+        submitBtn2.setBorder(null);
+        submitBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtn2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(submitBtn2);
+        submitBtn2.setBounds(250, 450, 170, 40);
+
+        jLabel15.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(238, 237, 235));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Book Title:");
+        jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(jLabel15);
+        jLabel15.setBounds(460, 450, 110, 30);
+
+        txtStudentID.setBackground(new java.awt.Color(116, 114, 100));
+        txtStudentID.setFont(new java.awt.Font("Poppins", 1, 16)); // NOI18N
+        txtStudentID.setForeground(new java.awt.Color(224, 205, 210));
+        txtStudentID.setAlignmentX(0.0F);
+        txtStudentID.setAlignmentY(0.0F);
+        txtStudentID.setAutoscrolls(false);
+        txtStudentID.setBorder(null);
+        jPanel1.add(txtStudentID);
+        txtStudentID.setBounds(580, 490, 210, 33);
+
+        jLabel17.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(238, 237, 235));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Book Title:");
+        jLabel17.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel1.add(jLabel17);
+        jLabel17.setBounds(460, 490, 110, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,15 +267,19 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-
-    }//GEN-LAST:event_submitBtnActionPerformed
-
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         StaffLogin sl = new StaffLogin();
         this.setVisible(false);
         sl.setVisible(true);
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void submitBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_submitBtn1ActionPerformed
+
+    private void submitBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtn2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_submitBtn2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,14 +318,18 @@ public class MainMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel showStudentID;
-    private javax.swing.JButton submitBtn;
+    private javax.swing.JButton submitBtn1;
+    private javax.swing.JButton submitBtn2;
     private javax.swing.JTable tbViewBooks;
+    private javax.swing.JTextField txtStudentID;
     // End of variables declaration//GEN-END:variables
 }
