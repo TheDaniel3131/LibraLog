@@ -4,6 +4,16 @@
  */
 package libralog;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Daniel
@@ -13,8 +23,54 @@ public class ViewUsers extends javax.swing.JFrame {
     /**
      * Creates new form ViewUsers
      */
+    
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+    
     public ViewUsers() {
         initComponents();
+        this.setSize(770, 500);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setResizable(false);
+        
+        this.setTitle("View Staff Users | LibraLog");
+        this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
+        
+        con = db.mycon();
+        
+        // View Staffs Table
+        tbViewUsers.getTableHeader().setFont(new Font("Poppins", Font.BOLD, 16));
+        tbViewUsers.getTableHeader().setBackground(new Color(36,56,62));
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("Staff ID");
+        tableModel.addColumn("Staff Username");
+        tbViewUsers.setModel(tableModel);
+
+        // Retrieve Books Information from Books
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/libralog", "root", "")) {
+            String sql = "SELECT * FROM staffs";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    // Iterate through the result set and add rows to the DefaultTableModel
+                    tableModel.setRowCount(0); // Clear existing rows
+
+                    while (resultSet.next()) {
+                        // Add each row of book information to the DefaultTableModel
+                        Object[] row = {
+                            resultSet.getInt("staff_id"),
+                            resultSet.getString("username"),
+                        };
+                        tableModel.addRow(row);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Failed to view books.");
+        }
+        con = db.mycon();  
     }
 
     /**
@@ -26,21 +82,137 @@ public class ViewUsers extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbViewUsers = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        backBtn = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(71, 74, 79));
+        jPanel1.setLayout(null);
+
+        jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 30)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(190, 199, 224));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("LibraLog - View Users");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(30, 30, 370, 40);
+
+        jPanel5.setBackground(new java.awt.Color(50, 67, 72));
+        jPanel5.setLayout(null);
+
+        tbViewUsers.setBackground(new java.awt.Color(71, 99, 129));
+        tbViewUsers.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
+        tbViewUsers.setForeground(new java.awt.Color(147, 192, 202));
+        tbViewUsers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Staff ID", "Staff Username"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbViewUsers);
+
+        jPanel5.add(jScrollPane1);
+        jScrollPane1.setBounds(0, 0, 520, 210);
+
+        jPanel1.add(jPanel5);
+        jPanel5.setBounds(37, 115, 520, 210);
+
+        jLabel5.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(101, 106, 184));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("*****************************************************");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(0, 70, 600, 30);
+
+        backBtn.setBackground(new java.awt.Color(60, 54, 51));
+        backBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(170, 204, 230));
+        backBtn.setText("Back");
+        backBtn.setBorder(null);
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(backBtn);
+        backBtn.setBounds(600, 30, 120, 40);
+
+        jLabel16.setFont(new java.awt.Font("Poppins", 1, 15)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(238, 237, 235));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("*****************************************************");
+        jPanel1.add(jLabel16);
+        jLabel16.setBounds(40, 350, 540, 30);
+
+        btnLogout.setBackground(new java.awt.Color(60, 54, 51));
+        btnLogout.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(170, 204, 230));
+        btnLogout.setText("Logout");
+        btnLogout.setBorder(null);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogout);
+        btnLogout.setBounds(600, 90, 120, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        StaffMainMenu smm = new StaffMainMenu();
+        this.setVisible(false);
+        smm.setVisible(true);
+
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        Home hm = new Home();
+        this.setVisible(false);
+        hm.setVisible(true);
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +250,14 @@ public class ViewUsers extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbViewUsers;
     // End of variables declaration//GEN-END:variables
 }

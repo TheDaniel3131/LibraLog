@@ -54,7 +54,6 @@ public class StaffMainMenu extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        btnEditUsers = new javax.swing.JButton();
         btnAddUsers = new javax.swing.JButton();
         btnDeleteUsers = new javax.swing.JButton();
         btnViewUsers = new javax.swing.JButton();
@@ -165,19 +164,6 @@ public class StaffMainMenu extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(36, 56, 62));
         jPanel4.setLayout(null);
 
-        btnEditUsers.setBackground(new java.awt.Color(81, 114, 149));
-        btnEditUsers.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        btnEditUsers.setForeground(new java.awt.Color(170, 215, 230));
-        btnEditUsers.setText("Delete Users");
-        btnEditUsers.setBorder(null);
-        btnEditUsers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditUsersActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnEditUsers);
-        btnEditUsers.setBounds(50, 280, 210, 40);
-
         btnAddUsers.setBackground(new java.awt.Color(81, 114, 149));
         btnAddUsers.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         btnAddUsers.setForeground(new java.awt.Color(170, 215, 230));
@@ -189,7 +175,7 @@ public class StaffMainMenu extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnAddUsers);
-        btnAddUsers.setBounds(50, 160, 210, 40);
+        btnAddUsers.setBounds(40, 180, 210, 40);
 
         btnDeleteUsers.setBackground(new java.awt.Color(81, 114, 149));
         btnDeleteUsers.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
@@ -202,7 +188,7 @@ public class StaffMainMenu extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnDeleteUsers);
-        btnDeleteUsers.setBounds(50, 220, 210, 40);
+        btnDeleteUsers.setBounds(40, 240, 210, 40);
 
         btnViewUsers.setBackground(new java.awt.Color(81, 114, 149));
         btnViewUsers.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
@@ -215,7 +201,7 @@ public class StaffMainMenu extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnViewUsers);
-        btnViewUsers.setBounds(50, 100, 210, 40);
+        btnViewUsers.setBounds(40, 120, 210, 40);
 
         jLabel18.setFont(new java.awt.Font("Poppins SemiBold", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(238, 237, 235));
@@ -300,12 +286,6 @@ public class StaffMainMenu extends javax.swing.JFrame {
         au.setVisible(true);
     }//GEN-LAST:event_btnAddUsersActionPerformed
 
-    private void btnEditUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUsersActionPerformed
-        EditUsers eu = new EditUsers();
-        this.setVisible(false);
-        eu.setVisible(true);
-    }//GEN-LAST:event_btnEditUsersActionPerformed
-
     private void btnViewBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBooksActionPerformed
         ViewBooks vb = new ViewBooks();
         this.setVisible(false);
@@ -373,7 +353,6 @@ public class StaffMainMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteBooks2;
     private javax.swing.JButton btnDeleteUsers;
     private javax.swing.JButton btnEditBooks;
-    private javax.swing.JButton btnEditUsers;
     private javax.swing.JButton btnViewBooks;
     private javax.swing.JButton btnViewUsers;
     private javax.swing.JLabel jLabel16;

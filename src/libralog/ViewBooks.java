@@ -32,7 +32,7 @@ public class ViewBooks extends javax.swing.JFrame {
     
     public ViewBooks() {
         initComponents();
-        this.setSize(1000, 520);
+        this.setSize(850, 520);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
@@ -97,7 +97,6 @@ public class ViewBooks extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        submitBtn = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -185,19 +184,6 @@ public class ViewBooks extends javax.swing.JFrame {
         jPanel1.add(jLabel16);
         jLabel16.setBounds(40, 410, 540, 30);
 
-        submitBtn.setBackground(new java.awt.Color(81, 114, 149));
-        submitBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
-        submitBtn.setForeground(new java.awt.Color(170, 215, 230));
-        submitBtn.setText("Submit");
-        submitBtn.setBorder(null);
-        submitBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(submitBtn);
-        submitBtn.setBounds(780, 120, 170, 40);
-
         btnLogout.setBackground(new java.awt.Color(60, 54, 51));
         btnLogout.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(170, 204, 230));
@@ -231,10 +217,6 @@ public class ViewBooks extends javax.swing.JFrame {
         smm.setVisible(true);
         
     }//GEN-LAST:event_backBtnActionPerformed
-
-    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-
-    }//GEN-LAST:event_submitBtnActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         Home hm = new Home();
@@ -289,7 +271,6 @@ public class ViewBooks extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton submitBtn;
     private javax.swing.JTable tbViewBooks;
     // End of variables declaration//GEN-END:variables
 }
