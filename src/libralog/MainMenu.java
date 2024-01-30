@@ -340,8 +340,15 @@ public class MainMenu extends javax.swing.JFrame {
             try {
                 Statement s = db.mycon().createStatement();
                 s.executeUpdate("UPDATE books SET copies_available = copies_available - 1 WHERE book_id = " + bookID);
-                JOptionPane.showMessageDialog(rootPane, "The book has been borrowed.", "Success!", JOptionPane.INFORMATION_MESSAGE);
-                
+                int confirm = JOptionPane.showConfirmDialog(rootPane, "The book has been borrowed. Continue?", "Borrowing Book Confirmation", JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(rootPane, "The book has been borrowed.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println("Borrowed!");
+                } else {
+                    return;
+                }
+
                 // SwingUtilities.updateComponentTreeUI(this);
                 // this.invalidate();
                 // this.validate();
