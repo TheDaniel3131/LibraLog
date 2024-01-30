@@ -153,7 +153,10 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_loginStaffActionPerformed
 
     private void registerAccount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerAccount1ActionPerformed
-        // TODO add your handling code here:
+       RegisterStudent rs = new RegisterStudent();
+       this.setVisible(false);
+       rs.setVisible(true);
+       rs.setFocusable(true);
     }//GEN-LAST:event_registerAccount1ActionPerformed
 
     /**

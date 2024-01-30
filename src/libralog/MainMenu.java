@@ -4,7 +4,15 @@
  */
 package libralog;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,21 +23,65 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
+    Connection con = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+    
     public MainMenu() {
         initComponents();
-        this.setSize(1210, 600);
+        this.setSize(850, 600);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
         
         this.setTitle("Main Menu | LibraLog");
         this.setIconImage(new ImageIcon(getClass().getResource("assets/original/books.jpg")).getImage());
+    
+        // View Books Table
+        tbViewBooks.getTableHeader().setFont(new Font("Poppins", Font.BOLD, 16));
+        tbViewBooks.getTableHeader().setBackground(new Color(36,56,62));
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("Book ID");
+        tableModel.addColumn("Title");
+        tableModel.addColumn("Author");
+        tableModel.addColumn("Quantity");
+        tbViewBooks.setModel(tableModel);
+     
+        // Set connection 
+        
+        con = db.mycon();
+        
+        // Retrieve Books Information from Books
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/libralog", "root", "")) {
+            String sql = "SELECT * FROM books";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    // Iterate through the result set and add rows to the DefaultTableModel
+                    tableModel.setRowCount(0); // Clear existing rows
+
+                    while (resultSet.next()) {
+                        // Add each row of book information to the DefaultTableModel
+                        Object[] row = {
+                            resultSet.getInt("book_id"),
+                            resultSet.getString("title"),
+                            resultSet.getString("author"),
+                            resultSet.getInt("copies_available")
+                        };
+                        tableModel.addRow(row);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Failed to view books.");
+        }
+        con = db.mycon();
     }
 
     // Created Constructor. Allowing to pass Student ID from login to Main Menu here.
     MainMenu(String studentID) {
         this();
-        showStudentID.setText("Welcome, " +studentID);
+        showStudentID.setText("Hello, " +studentID);
     }
 
     /**
@@ -43,27 +95,29 @@ public class MainMenu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
         showStudentID = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         submitBtn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        backBtn = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbViewBooks = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(116, 114, 100));
+        jPanel1.setForeground(new java.awt.Color(224, 205, 210));
+        jPanel1.setMinimumSize(new java.awt.Dimension(850, 600));
+        jPanel1.setPreferredSize(new java.awt.Dimension(850, 600));
         jPanel1.setLayout(null);
 
-        jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 30)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Poppins Black", 0, 34)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(224, 204, 190));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("LibraLog");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 20, 150, 40);
-
-        jPanel5.setBackground(new java.awt.Color(60, 54, 51));
-        jPanel5.setLayout(null);
-        jPanel1.add(jPanel5);
-        jPanel5.setBounds(30, 70, 630, 310);
+        jLabel3.setBounds(30, 30, 160, 40);
 
         showStudentID.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         showStudentID.setForeground(new java.awt.Color(224, 205, 210));
@@ -76,12 +130,12 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("If any problem, email help@libralog.com");
         jPanel1.add(jLabel16);
-        jLabel16.setBounds(270, 400, 380, 30);
+        jLabel16.setBounds(20, 500, 380, 30);
 
         submitBtn.setBackground(new java.awt.Color(149, 119, 81));
         submitBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
         submitBtn.setForeground(new java.awt.Color(230, 208, 170));
-        submitBtn.setText("Submit");
+        submitBtn.setText("Borrow Book");
         submitBtn.setBorder(null);
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +143,72 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(submitBtn);
-        submitBtn.setBounds(650, 120, 170, 40);
+        submitBtn.setBounds(50, 440, 170, 40);
+
+        jLabel5.setFont(new java.awt.Font("Poppins", 1, 22)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(224, 205, 210));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Welcome to LibraLog Library!");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(70, 70, 640, 30);
+
+        jLabel6.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(224, 205, 210));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Come & Check Our LibraLog Books. Everyone Can Read.");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(0, 100, 600, 30);
+
+        backBtn.setBackground(new java.awt.Color(60, 54, 51));
+        backBtn.setFont(new java.awt.Font("Poppins", 1, 20)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(224, 205, 210));
+        backBtn.setText("Logout");
+        backBtn.setBorder(null);
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(backBtn);
+        backBtn.setBounds(630, 30, 120, 40);
+
+        tbViewBooks.setBackground(new java.awt.Color(60, 54, 51));
+        tbViewBooks.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tbViewBooks.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
+        tbViewBooks.setForeground(new java.awt.Color(224, 205, 210));
+        tbViewBooks.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Book ID", "Book Title", "Author Name", "Quantity"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tbViewBooks);
+
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(50, 140, 720, 270);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,6 +227,12 @@ public class MainMenu extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
 
     }//GEN-LAST:event_submitBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        StaffLogin sl = new StaffLogin();
+        this.setVisible(false);
+        sl.setVisible(true);
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,11 +270,15 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel showStudentID;
     private javax.swing.JButton submitBtn;
+    private javax.swing.JTable tbViewBooks;
     // End of variables declaration//GEN-END:variables
 }
